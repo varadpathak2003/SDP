@@ -1,4 +1,3 @@
-//create concrete class computer
 //prototype interface
 interface Enemy{
     Enemy clone();
@@ -54,6 +53,7 @@ class Alien implements Enemy{
         System.out.println("Alien Spawned");
     }
 }
+//Client Code
 public class Main {
     public static void main(String[] args) {
         Enemy zombiePrototype = new Zombie("Zombie", 100, 20, "Aggressive");
