@@ -1,43 +1,67 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 interface Vehicle {
-    public void printVehicle();
+    void start();
+    void stop();
 }
 
-class TwoWheeler implements Vehicle {
-    public void printVehicle() {
-        System.out.println("I am two wheeler");
+class Car implements Vehicle {
+    public void start() {
+        System.out.println("Car starting...");
+    }
+    public void stop() {
+        System.out.println("Car stopping...");
     }
 }
 
-class FourWheeler implements Vehicle {
-    public void printVehicle() {
-        System.out.println("I am four wheeler");
+class Truck implements Vehicle {
+    public void start() {
+        System.out.println("Truck starting...");
+    }
+    public void stop() {
+        System.out.println("Truck stopping...");
     }
 }
 
-interface VehicleFactory {
-    Vehicle createVehicle();
-}
-
-class TwoWheelerFactory implements VehicleFactory {
-    public Vehicle createVehicle() {
-        return new TwoWheeler();
+class Motorcycle implements Vehicle {
+    public void start() {
+        System.out.println("Motorcycle starting...");
+    }
+    public void stop() {
+        System.out.println("Motorcycle stopping...");
     }
 }
 
-class FourWheelerFactory implements VehicleFactory {
-    public Vehicle createVehicle() {
-        return new FourWheeler();
+class VehicleFactory {
+    private static final Map<String, Vehicle> registry = new HashMap<>();
+    
+     static {
+        // Register default vehicle types
+        registerVehicle("car", new Car());
+        registerVehicle("truck", new Truck());
+        registerVehicle("motorcycle",  new Motorcycle());
     }
+    
+    public static void registerVehicle(String type,Vehicle vehicle ) {
+        registry.put(type,vehicle);
+    }
+    
+    public static Vehicle createVehicle(String type) {
+        Vehicle vehicle = registry.get(type);
+        return vehicle;
+    }
+    
 }
-
 public class Main {
     public static void main(String[] args) {
-        VehicleFactory twoFactory = new TwoWheelerFactory();
-        Vehicle two = twoFactory.createVehicle();
-        two.printVehicle();
-
-        VehicleFactory fourFactory = new FourWheelerFactory();
-        Vehicle four = fourFactory.createVehicle();
-        four.printVehicle();
+        
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the vehicle type : ");
+        String type=sc.next();     
+        Vehicle vehicle =VehicleFactory.createVehicle(type);
+        vehicle.start();
+        vehicle.stop();
     }
 }
