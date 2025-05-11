@@ -24,7 +24,7 @@ public int spin(){
 
 }
 public class Main {
-public static void main(String\[] args) {
+public static void main(String[] args) {
 SlotMachine proxy=new SlotMachineProxy(new NormalSlotMachine());
 System.out.println(proxy.spin());
 System.out.println(proxy.spin());
