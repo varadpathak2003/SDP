@@ -2,9 +2,9 @@ import java.util.*;
 class Main{
     public static void main(String args[]){
         ChatRoom room=new ChatRoom();
-        Col member1=new Col("Raj");
-        Col member2=new Col("Rahul");
-        Col member3=new Col("Rohit");
+        Col member1=new Col("Raj",room);
+        Col member2=new Col("Rahul",room);
+        Col member3=new Col("Rohit",room);
         room.registerMember(member1);
         room.registerMember(member2);
         room.registerMember(member3);
@@ -12,13 +12,17 @@ class Main{
         room.sendMessage("Hello ","Raj",member2);
     }
 }
-
 class Col{
     String name;
-    Col (String name){
+    ChatRoom room;
+    Col (String name,ChatRoom room){
         this.name=name;
+        this.room=room;
     }
-    public void receive(String message){
+    void sendMessage(String message,String to){
+        room.sendMessage(message,to,this);
+    }
+    void receive(String message){
         System.out.println("Message : "+message);
     }
 }
@@ -33,7 +37,6 @@ class ChatRoom{
     }
     public void sendMessage(String message,String to,Col sendFrom){
         Col sendTo=members.get(to);
-        System.out.println("Sending Message from : "+sendFrom.name);
         sendTo.receive(message);
     }
 }
