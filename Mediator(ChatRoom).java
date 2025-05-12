@@ -1,3 +1,6 @@
+//Implement a messaging system where participants can send messages to each other through a central ChatRoom, 
+//which manages the message routing. 
+//Each participant should send messages via the ChatRoom, which will handle delivering the messages to the intended recipient.
 import java.util.*;
 class Main{
     public static void main(String args[]){
