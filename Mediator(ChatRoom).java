@@ -38,7 +38,7 @@ class ChatRoom{
     public void registerMember(Col member){
         members.put(member.name,member);
     }
-    public void sendMessage(String message,String to){
+    public void sendMessage(String message,String to,String sendFrom){
         Col sendTo=members.get(to);
         sendTo.receive(message);
     }
